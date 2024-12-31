@@ -1,36 +1,38 @@
 from turtle import Turtle
 
 class Ball(Turtle):
-    def __init__(self):
+    def __init__(self, height, width):
         super().__init__()
         self.shape("circle")
         self.penup()
         self.color("white")
         self.goto(0,0)
+        self.height = height
+        self.width = width
+        self.movex = 1
+        self.movey = 1
     
-    def move(self):
-        self.goto(self.xcor() + 10, self.ycor() + 10)
+    def move(self) -> None:
+        self.goto(self.xcor() + self.movex, self.ycor() + self.movey)
+        self.check_WallCollision(height=self.height, width=self.width)
 
-    def bounce(self):
-        self.goto(self.xcor() - 10, self.ycor() - 10)
+    def bounceWall(self) -> None:
+        self.movey = -1 * self.movey
 
-    def reset(self):
+    def bouncePaddle(self) -> None:
+        self.movex = -1 * self.movex
+    
+    def reset(self) -> None:
         self.goto(0,0)
         self.bounce()
         self.move()
     
-    def check_collision(self):
-        if self.ycor() > 290 or self.ycor() < -290:
-            self.bounce()
-        if self.xcor() > 390 or self.xcor() < -390:
+    def check_WallCollision(self, height, width) -> False:
+        if self.ycor() > (height/2) or self.ycor() < -(height/2):
+            self.bounceWall()
+        if self.xcor() > (width/2) or self.xcor() < -(width/2):
             self.reset()
         return False
-    
-    def check_paddle_collision(self):
-        if self.xcor() > 340 and self.ycor() < 50 and self.ycor() > -50:
-            self.bounce()
-        if self.xcor() < -340 and self.ycor() < 50 and self.ycor() > -50:
-            self.bounce()
-        return False
+
     
     
