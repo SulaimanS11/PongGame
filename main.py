@@ -18,6 +18,7 @@ paddle = Paddle()
 opp_paddle = Paddle()
 ball = Ball(HEIGHT, WIDTH)
 
+# opponennt paddle starting positions
 opp_paddle.change_starting_position(350, 0)
 
 # movement funciton calls
@@ -27,7 +28,6 @@ screen.onkey(paddle.paddle_up, "w")
 screen.onkey(paddle.paddle_down, "s")
 screen.onkey(opp_paddle.paddle_up, "Up")
 screen.onkey(opp_paddle.paddle_down, "Down")
-
 
 
 game_on = True
