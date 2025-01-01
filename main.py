@@ -15,11 +15,9 @@ screen.tracer(0)
 
 #object inits
 paddle = Paddle()
-opp_paddle = Paddle()
-ball = Ball(HEIGHT, WIDTH)
+opp_paddle = Paddle(350, 0)
+ball = Ball(HEIGHT, WIDTH, paddle, opp_paddle)
 
-# opponennt paddle starting positions
-opp_paddle.change_starting_position(350, 0)
 
 # movement funciton calls
 screen.listen()
@@ -32,10 +30,12 @@ screen.onkey(opp_paddle.paddle_down, "Down")
 
 game_on = True
 
+
 while game_on:
     time.sleep(0.01)
     screen.update()
     ball.move()
+    print(Turtle.distance(opp_paddle, ball))
 
 
 screen.exitonclick()
